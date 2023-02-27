@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://c1coahspjfidk"]
+
+[ext_resource type="PackedScene" uid="uid://byx2cpo7e7n83" path="res://prefabs/vehicle.tscn" id="1_reu6t"]
+[ext_resource type="PackedScene" uid="uid://dd4ickvgncrs4" path="res://prefabs/ground.tscn" id="2_2t0tp"]
+[ext_resource type="PackedScene" uid="uid://bi6wswi06jb42" path="res://prefabs/speed_bump.tscn" id="2_x1euv"]
+[ext_resource type="PackedScene" uid="uid://bs8bfv0u5k03j" path="res://prefabs/ramp.tscn" id="3_4hypb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h1bwr"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_7m0fc"]
+energy_multiplier = 2.0
+
+[sub_resource type="Sky" id="Sky_h7hly"]
+sky_material = SubResource("PhysicalSkyMaterial_7m0fc")
+
+[sub_resource type="Environment" id="Environment_f5jvs"]
+background_mode = 2
+sky = SubResource("Sky_h7hly")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+ssao_enabled = true
+fog_enabled = true
+
+[node name="MainScene" type="Node3D"]
+
+[node name="Vehicle" parent="." instance=ExtResource("1_reu6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Vehicle"]
+transform = Transform3D(0.866025, -0.211309, 0.453154, 0, 0.906308, 0.422618, -0.5, -0.365998, 0.784885, 0, 0, -1.5)
+shape = SubResource("SphereShape3D_h1bwr")
+spring_length = 5.0
+metadata/_edit_lock_ = true
+
+[node name="Camera3D" type="Camera3D" parent="Vehicle/SpringArm3D"]
+current = true
+
+[node name="SpeedBumps" type="Node3D" parent="."]
+
+[node name="SpeedBump1" parent="SpeedBumps" instance=ExtResource("2_x1euv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -6)
+
+[node name="SpeedBump2" parent="SpeedBumps" instance=ExtResource("2_x1euv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -7)
+
+[node name="SpeedBump3" parent="SpeedBumps" instance=ExtResource("2_x1euv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -8)
+
+[node name="SpeedBump4" parent="SpeedBumps" instance=ExtResource("2_x1euv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -9)
+
+[node name="SpeedBump5" parent="SpeedBumps" instance=ExtResource("2_x1euv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -10)
+
+[node name="SpeedBump6" parent="SpeedBumps" instance=ExtResource("2_x1euv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -11)
+
+[node name="SpeedBump7" parent="SpeedBumps" instance=ExtResource("2_x1euv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -12)
+
+[node name="SpeedBump8" parent="SpeedBumps" instance=ExtResource("2_x1euv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -13)
+
+[node name="SpeedBump9" parent="SpeedBumps" instance=ExtResource("2_x1euv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -14)
+
+[node name="Ramps" type="Node3D" parent="."]
+
+[node name="Ramp" parent="Ramps" instance=ExtResource("3_4hypb")]
+transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0, 0.66, -25)
+
+[node name="Ramp2" parent="Ramps" instance=ExtResource("3_4hypb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34143, -28.8188)
+
+[node name="Ramp3" parent="Ramps" instance=ExtResource("3_4hypb")]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0.66, -32.6558)
+
+[node name="Ground" parent="." instance=ExtResource("2_2t0tp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0227952, 0, 0.718606)
+metadata/_edit_lock_ = true
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.766044, 0.321394, -0.556671, 0, 0.866025, 0.5, 0.642788, -0.383022, 0.663414, 0, 5, 0)
+shadow_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f5jvs")

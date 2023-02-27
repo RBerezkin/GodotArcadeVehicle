@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqyek3ywsej2j"]
+
+[ext_resource type="Material" uid="uid://bq43erh88xde2" path="res://materials/wheel.material" id="1_s4fdd"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vn211"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.1
+radial_segments = 8
+rings = 1
+
+[node name="WheelMesh" type="Node3D"]
+
+[node name="WheelMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("1_s4fdd")
+mesh = SubResource("CylinderMesh_vn211")
+skeleton = NodePath("../..")

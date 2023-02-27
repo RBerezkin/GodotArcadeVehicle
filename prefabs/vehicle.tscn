@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://byx2cpo7e7n83"]
+
+[ext_resource type="Script" path="res://scripts/raycast_wheel.gd" id="1_ov0fr"]
+[ext_resource type="PackedScene" uid="uid://cqyek3ywsej2j" path="res://prefabs/wheel_mesh.tscn" id="2_pi5iu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_i3lsu"]
+radius = 0.35
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7j2i2"]
+radius = 0.35
+
+[node name="Vehicle" type="RigidBody3D"]
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.5, 0)
+
+[node name="BodyMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_i3lsu")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+editor_description = "
+"
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_7j2i2")
+
+[node name="Wheel_FrontLeft" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0, -0.6)
+script = ExtResource("1_ov0fr")
+use_as_traction = true
+use_as_steering = true
+
+[node name="WheelMesh" parent="Wheel_FrontLeft" instance=ExtResource("2_pi5iu")]
+
+[node name="Wheel_FrontRight" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0, -0.6)
+script = ExtResource("1_ov0fr")
+use_as_traction = true
+use_as_steering = true
+
+[node name="WheelMesh" parent="Wheel_FrontRight" instance=ExtResource("2_pi5iu")]
+
+[node name="Wheel_RearLeft" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0, 0.6)
+script = ExtResource("1_ov0fr")
+use_as_traction = true
+
+[node name="WheelMesh" parent="Wheel_RearLeft" instance=ExtResource("2_pi5iu")]
+
+[node name="Wheel_RearRight" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0, 0.6)
+script = ExtResource("1_ov0fr")
+use_as_traction = true
+
+[node name="WheelMesh" parent="Wheel_RearRight" instance=ExtResource("2_pi5iu")]
